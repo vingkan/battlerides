@@ -1,0 +1,24 @@
+body{
+    padding:50px;
+    padding-top:0px;
+    margin-top:0;
+    background-color: #ABC8C7;
+    text-align: center;
+}
+#chat-box1{
+    float:left;
+    text-align: center;
+}
+
+#chat-box2{
+    float:right;
+    text-align: center;
+
+}
+
+#map-view {
+width: 800px;
+height: 400px;
+margin: auto;
+    
+}
