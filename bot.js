@@ -71,11 +71,11 @@ let Bot = (cityMap, userMap, riderMap) => {
             
             disruptlist.forEach((move)=>{
                 bot.disrupt(move[0]);
-                console.log(move[0] + 'disrupts');
+                console.log(move[0] + 'tries to disrupts');
             });
             drivelist.forEach((move)=>{
                bot.drive(move[0], move[1].to);
-               console.log(move[0] + 'drives');
+               console.log(move[0] + 'tries to drives');
             });
             
             

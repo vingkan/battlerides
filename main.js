@@ -131,30 +131,55 @@ let view2 = renderGroupChatView(bot, 'group2', GROUP2)
 gchat1.appendChild(view1.holder);
 gchat2.appendChild(view2.holder);
 
-let ROUND_LENGTH = 3 * 1000;
+let ROUND_LENGTH = 35 * 1000;
 let round_start = Date.now();
 
 view1.accepting = true;
 view2.accepting = true;
 
+let g1Turn = true;
+let played = 0;
 setInterval(() => {
-    if(Date.now() - ROUND_LENGTH > round_start){
-        view1.accepting = false;
-        view2.accepting = false;
-        //console.log('Round ends.');
+    if(played === 2){
+        played = 0;
         bot.update(bot.moves);
         geoMap.render(bot.cityMap, bot.userMap, bot.riderMap);
-        //setTimeout(() => {
-            //console.log('New round.');
-            view1.accepting = true;
-            view2.accepting = true;
-            round_start = Date.now();
-        //}, 2000);
+        view1.addMessage({
+            name: "Bot",
+            message: "Map Updated"
+        });
+        view2.addMessage({
+            name: "Bot",
+            message: "Map Updated"
+        });
     }
-}, ROUND_LENGTH / 2);
-
-let reply1 = bot.report();
-let reply2 = bot.report()
+    if(g1Turn){
+        view2.accepting = false;
+        view2.addMessage({
+            name: "Bot",
+            message: "You cannot play right now."
+        });
+        view1.accepting = true;
+        view1.addMessage({
+            name: "Bot",
+            message: "Your round starts."
+        });
+    }
+    else{
+        view1.accepting = false;
+        view1.addMessage({
+            name: "Bot",
+            message: "You cannot play right now."
+        });
+        view2.accepting = true;
+        view2.addMessage({
+            name: "Bot",
+            message: "Your round starts."
+        });
+    }
+    g1Turn = !g1Turn;
+    played++;
+}, ROUND_LENGTH);
 
 //Unit tests :s
 function test_botprocess(){
