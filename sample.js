@@ -1,7 +1,8 @@
 let getIntersection = (streets) => {
-    return streets.sort((a, b) => {
+    /*return streets.sort((a, b) => {
         return a.localeCompare(b);
-    }).join('/');
+    }).join('/');*/
+    return streets.join('/');
 }
 
 let getRandomIntersection = (map) => {
@@ -13,8 +14,12 @@ let getRandomIntersection = (map) => {
 let Sample = {
     
     initializeGameData: (config) => {
-        let HORIZONTAL_STREETS = config.horizontal_streets;
-        let VERTICAL_STREETS = config.vertical_streets;
+        let HORIZONTAL_STREETS = config.horizontal_streets.sort((a, b) => {
+            return a.lat - b.lat;
+        });
+        let VERTICAL_STREETS = config.vertical_streets.sort((a, b) => {
+            return a.lon - b.lon;
+        });
         let GROUP1 = config.groups[0];
         let GROUP2 = config.groups[1];
         let CITY_MAP = {};
@@ -27,8 +32,8 @@ let Sample = {
                     {h: hidx, v: vidx-1},
                     {h: hidx, v: vidx+1}
                 ].map(idx => {
-                    let hs = HORIZONTAL_STREETS[idx.h];
-                    let vs = VERTICAL_STREETS[idx.v];
+                    let hs = HORIZONTAL_STREETS[idx.h] || false;
+                    let vs = VERTICAL_STREETS[idx.v] || false;
                     return {
                         h: hs,
                         v: vs
@@ -70,8 +75,11 @@ let Sample = {
             let rider = config.rider_list[i];
             riderMap[rider.rid] = rider;
             riderMap[rider.rid].satisfaction = 100;
-            riderMap[rider.rid].pickuplocation = getRandomIntersection(CITY_MAP);
+            riderMap[rider.rid].pickup = getRandomIntersection(CITY_MAP);
             riderMap[rider.rid].dropoff = getRandomIntersection(CITY_MAP);
+            riderMap[rider.rid].incar = false;
+            riderMap[rider.rid].completedby = false;
+            //riderMap[rider.dropoff]=rider.rid;
         }
         
         return {

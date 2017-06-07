@@ -1,24 +1,48 @@
-body{
-    padding:50px;
-    padding-top:0px;
-    margin-top:0;
-    background-color: #ABC8C7;
-    text-align: center;
-}
-#chat-box1{
-    float:left;
-    text-align: center;
-}
-
-#chat-box2{
-    float:right;
-    text-align: center;
-
+html, body {
+    margin: 0;
+    padding: 0;
 }
 
 #map-view {
-width: 800px;
-height: 400px;
-margin: auto;
-    
+    width: 100vw;
+    height: 400px;
+}
+
+.group-chat-holder {
+    display: inline-block;
+    padding: 20px;
+}
+
+.group-chat {
+    width: 200px;
+}
+
+.group-chat .history, .group-chat select, .group-chat textarea {
+    width: 100%;
+    display: block;
+    margin: 10px;
+}
+
+.group-chat textarea {
+    max-width: 100%;
+    min-height: 60px;
+    line-height: 20px;
+    font-size: 15px;
+}
+
+.group-chat .history {
+    height: 250px;
+    overflow-y: scroll;
+}
+
+.group-chat .sender {
+    opacity: 0.5;
+    font-size: 12px;
+    line-height: 15px;
+}
+
+.group-chat .message {
+    margin-bottom: 10px;
+    font-size: 15px;
+    line-height: 20px;
 }
